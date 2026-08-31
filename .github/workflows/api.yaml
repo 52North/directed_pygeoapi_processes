@@ -22,6 +22,8 @@ on:
   push:
     tags:
     - "v*"
+permissions:
+  contents: read
 jobs:
   push_to_docker_hub:
     name: build push docker image
@@ -117,7 +119,7 @@ jobs:
         REPO_NAME: ${{ github.repository }}
         REPO_URL: "https://github.com/${{ github.repository }}/actions"
       run: |
-        CONTENT=$(cat trivy-results.txt | head -c 3800)
+        TRIVY_CONTENT=$(cat trivy-results.txt | head -c 3800)
         MESSAGE="Trivy Results for '${REPO_NAME}':\n\n\`\`\`\n${TRIVY_CONTENT}\n\`\`\`\n\n(Results truncated) Please review full report at: ${REPO_URL}"
         JSON_PAYLOAD=$(jq -n --arg msg "$MESSAGE" '{text: $msg}')
         curl -X POST -H 'Content-Type: application/json' "$WEBHOOK_URL" -d "$JSON_PAYLOAD"
