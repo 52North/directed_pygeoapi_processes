@@ -1,4 +1,4 @@
-FROM geopython/pygeoapi:latest
+FROM geopython/pygeoapi:0.24.0
 
 #
 #   install latest system updates
@@ -13,4 +13,4 @@ COPY ./data/dnk_ppp_2020_1km_Aggregated_UNadj.tif /pygeoapi/data/processes/dnk_p
 COPY ./src /directed_pygeoapi_processes/src
 COPY ./requirements.txt /directed_pygeoapi_processes/requirements.txt
 COPY ./pyproject.toml /directed_pygeoapi_processes/pyproject.toml
-RUN cd /directed_pygeoapi_processes && pip install .
+RUN cd /directed_pygeoapi_processes && /venv/bin/pip install .

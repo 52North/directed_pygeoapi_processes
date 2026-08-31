@@ -1,5 +1,6 @@
 services:
   pygeoapi:
+    image: 52north/directed-api:latest
     build:
       context: .
       dockerfile: Dockerfile
